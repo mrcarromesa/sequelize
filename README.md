@@ -244,4 +244,21 @@ User.update({ lastName: "Doe" }, {
   console.log("Done");
 });
 ```
+* Uma forma eficaz de update: [```save```](https://sequelize.org/v5/class/lib/model.js~Model.html#instance-method-save) Ex.:
 
+```js
+async update(req, res) {
+    // Realiza consulta
+    const q = await People.findByPk(req.params.id);
+
+    if (q) {
+        // Altera o valor do campo
+        q.name = 'Novo nome';
+    }
+
+    // -- Mágica...  commita
+    await q.save();
+
+    return res.json(q);
+}
+```

@@ -9,5 +9,6 @@ const port = 3000;
 
 app.get('/', PeopleController.index);
 app.post('/', PeopleController.create);
+app.put('/:id', PeopleController.update);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -53,6 +53,21 @@ class PeopleController {
             return res.status(500).json({ error: 'Server error' });
         }
     }
+
+    async update(req, res) {
+        // Realiza consulta
+        const q = await People.findByPk(req.params.id);
+
+        if (q) {
+            // Altera o valor do campo
+            q.name = 'Novo nome';
+        }
+
+        // -- Mágica...  commita
+        await q.save();
+
+        return res.json(q);
+    }
 }
 
 export default new PeopleController();
